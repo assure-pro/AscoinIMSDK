@@ -70,9 +70,9 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/assure-pro/AscoinIMSDK.git", :tag => spec.version }
 
 
-  spec.vendored_frameworks = 'AscoinIMSDK/Framework/OpenIMCore.xcframework'
+  spec.vendored_frameworks = 'OpenIMCore.xcframework'
   
   spec.user_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES' }
-  spec.pod_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES' }
+  spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64' }
 
 end
