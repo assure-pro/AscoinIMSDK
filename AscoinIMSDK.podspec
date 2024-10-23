@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
         AscoinIMSDK
                    DESC
 
-  spec.homepage     = "https://github.com/assure-pro/AscoinIMSDK.git"
+  spec.homepage     = "https://github.com/assure-pro/AscoinIMSDK"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -50,7 +50,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "AScoin" => "1214907381@qq.com" }
+  spec.author             = { "AScoin" => "https://github.com/assure-pro/AscoinIMSDK" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -58,7 +58,7 @@ Pod::Spec.new do |spec|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  spec.platform     = :ios, '11.0'
+  spec.ios.deployment_target = '11.0'
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -69,10 +69,17 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/assure-pro/AscoinIMSDK.git", :tag => spec.version }
 
-
-  spec.vendored_frameworks = 'OpenIMCore.xcframework'
+    
+  valid_archs = ['armv7s','arm64','x86_64']
+  spec.xcconfig = {
+    'VALID_ARCHS' =>  valid_archs.join(' '),
+  }
+  spec.pod_target_xcconfig = {
+      'ARCHS[sdk=iphonesimulator*]' => '$(ARCHS_STANDARD_64_BIT)'
+  }
   
-  spec.user_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES' }
-  spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64' }
+  spec.static_framework = true
+  spec.library = 'resolv'
+  spec.vendored_frameworks = 'OpenIMCore.xcframework'
 
 end
